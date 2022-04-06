@@ -6,6 +6,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
 
+//danh muc san pham trang chu
+Route::get('/danh-muc-san-pham/{id_category}', 'CategoryProduct@show_category_home');
+
+Route::get('/thuong-hieu-san-pham/{id_brand}', 'Supplier@show_brand_home');
+
+Route::get('/chi-tiet-san-pham/{id_product}', 'ProductController@show_detail_product');
+
+
 
 
 

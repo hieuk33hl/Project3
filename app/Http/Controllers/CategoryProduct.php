@@ -59,4 +59,23 @@ class CategoryProduct extends Controller
         Session::put('message', 'Cập nhật danh mục thành công');
         return Redirect::to('/all-category-product');
     }
+
+    public function show_category_home(Request $request, $id_category)
+    {
+        $category = DB::table("danh_muc")->orderBy('id_category', 'ASC')->where("danh_muc.status", 1)->get();
+        $supplier = DB::table("nha_cung_cap")->orderBy('id_supplier', 'ASC')->get();
+
+        $category_by_id = DB::table("san_pham")
+            ->join("danh_muc", 'san_pham.category', '=', 'danh_muc.id_category')
+            ->where('san_pham.category', $id_category)
+            ->get();
+
+        $category_name = DB::table("danh_muc")->where("danh_muc.id_category", $id_category)->limit(1)->get();
+        return view('pages.category.showcategory', [
+            'category' => $category,
+            'supplier' => $supplier,
+            'product' => $category_by_id,
+            'category_name' => $category_name
+        ]);
+    }
 }
