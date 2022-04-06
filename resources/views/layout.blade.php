@@ -39,10 +39,7 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="contactinfo">
-                            <ul class="nav nav-pills">
-                                <li><a href="#"><i class="fa fa-phone"></i> +2 95 01 88 821</a></li>
-                                <li><a href="#"><i class="fa fa-envelope"></i> info@domain.com</a></li>
-                            </ul>
+
                         </div>
                     </div>
                     <div class="col-sm-6">
@@ -235,7 +232,7 @@
                                 <ul class="nav nav-pills nav-stacked">
                                     @foreach ($supplier as $item)
                                         <li><a href="{{ URL::to('/thuong-hieu-san-pham/' . $item->id_supplier) }}">
-                                                <span class="pull-right">(50)</span>{{ $item->name_sup }}</a>
+                                                <span class="pull-right"></span>{{ $item->name_sup }}</a>
                                         </li>
                                     @endforeach
                                 </ul>

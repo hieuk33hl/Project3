@@ -6,7 +6,6 @@
             <div class="col-sm-5">
                 <div class="view-product">
                     <img src="{{ $item->image }}" alt="" />
-                    <h3>ZOOM</h3>
                 </div>
                 <div id="similar-product" class="carousel slide" data-ride="carousel">
 
@@ -32,24 +31,26 @@
             <div class="col-sm-7">
                 <div class="product-information">
                     <!--/product-information-->
-                    <img src="{{ asset('frontend') }}/images/product-details/new.jpg" class="newarrival" alt="" />
                     <h2>{{ $item->name }}</h2>
                     <p>Mã ID: {{ $item->id_product }}</p>
                     {{-- <img src="{{ $item->image }}" alt="" /> --}}
-                    <span>
-                        <span>US ${{ number_format($item->price) }}</span>
-                        <label>Số lượng:{{ $item->stock }}</label>
-                        <input type="number" value="1" min="1" />
-                        <button type="button" class="btn btn-fefault cart">
-                            <i class="fa fa-shopping-cart"></i>
-                            Thêm
-                        </button>
-                    </span>
+                    <form method="post" action="{{ URL::to('/save-cart') }}">
+                        {{ csrf_field() }}
+                        <span>
+                            <span>US ${{ number_format($item->price) }}</span>
+                            <label>Số lượng:{{ $item->stock }}</label>
+                            <input type="hidden" name="product_id" value="{{ $item->id_product }}" />
+                            <input name="qty" value="1" min="1" type="number" />
+                            <button type="submit" class="btn btn-fefault cart">
+                                <i class="fa fa-shopping-cart"></i>
+                                Thêm
+                            </button>
+                        </span>
+                    </form>
                     <p><b>Tình trạng:</b> Còn hàng</p>
                     <p><b>Thương hiệu:</b> {{ $item->name_sup }}</p>
                     <p><b>Danh mục:</b> {{ $item->name_cat }}</p>
-                    <a href=""><img src="{{ asset('frontend') }}/images/product-details/share.png"
-                            class="share img-responsive" alt="" /></a>
+
                 </div>
                 <!--/product-information-->
             </div>

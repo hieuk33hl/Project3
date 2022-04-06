@@ -13,7 +13,8 @@ Route::get('/thuong-hieu-san-pham/{id_brand}', 'Supplier@show_brand_home');
 
 Route::get('/chi-tiet-san-pham/{id_product}', 'ProductController@show_detail_product');
 
-
+//cart
+Route::post('/save-cart', 'CartController@save_cart');
 
 
 
