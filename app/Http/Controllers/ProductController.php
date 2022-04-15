@@ -39,22 +39,21 @@ class ProductController extends Controller
         $data['supplier'] = $request->product_supplier;
         $data['detail'] = $request->product_detail;
         $data['status'] = $request->product_status;
-        $data['image'] = '';
 
         $get_image = $request->file('product_image');
-        // echo $get_image;
-        // die();
+
         if ($get_image) {
             $get_image_name = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_image_name));
-            $new_image = $name_image . rand(0, 99) . "." . $get_image->getClientOriginalExtension();
+            $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
             $get_image->move('public/upload/product', $new_image);
             $data['image'] = $new_image;
+            DB::table('san_pham')->insert($data);
+            return Redirect::to('/all-product');
         }
-        // echo "<pre>";
-        // print_r($data);
-        // echo "</pre>";
-        // die();
+        print_r($data);
+        die();
+        $data['image'] = '';
         DB::table('san_pham')->insert($data);
         Session::put('message', 'Thêm sản phẩm thành công');
         return Redirect::to('/all-product');

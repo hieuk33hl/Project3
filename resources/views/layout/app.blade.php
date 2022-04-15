@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/png" href="{{ asset('assets') }}/img/favicon.ico">
@@ -15,7 +16,7 @@
     <link href="{{ asset('assets') }}/css/bootstrap.min.css" rel="stylesheet" />
 
     <!--  Light Bootstrap Dashboard core CSS    -->
-    <link href="{{ asset('assets') }}/css/light-bootstrap-dashboard.css?v=1.4.1" rel="stylesheet"/>
+    <link href="{{ asset('assets') }}/css/light-bootstrap-dashboard.css?v=1.4.1" rel="stylesheet" />
 
     <!--  CSS for Demo Purpose, don't include it in your project     -->
     <link href="{{ asset('assets') }}/css/demo.css" rel="stylesheet" />
@@ -25,34 +26,37 @@
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="{{ asset('assets') }}/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
+    @include('sweetalert::alert')
 
 </head>
+
 <body>
 
-<div class="wrapper">
+    <div class="wrapper">
 
-{{--    sidebar--}}
-    @include('layout.sidebar')
-{{--    sidebar--}}
+        {{-- sidebar --}}
+        @include('layout.sidebar')
+        {{-- sidebar --}}
 
-    <div class="main-panel">
-{{--navbar--}}
-        @include('layout.navbar')
-{{--navbar--}}
+        <div class="main-panel">
+            {{-- navbar --}}
+            @include('layout.navbar')
+            {{-- navbar --}}
 
-    {{--        //content--}}
-        <div class="main-content">
-            <div class="container-fluid">
-                  @yield('content')
+            {{-- //content --}}
+            <div class="main-content">
+                <div class="container-fluid">
+                    @yield('content')
+                </div>
             </div>
+            {{-- endcontent --}}
+
+            {{-- footer --}}
+            @include('layout.footer')
+
         </div>
-    {{--endcontent--}}
-
-{{--        footer--}}
-        @include('layout.footer')
-
     </div>
-</div>
 
 
 </body>
@@ -112,14 +116,14 @@
 <script src="{{ asset('assets') }}/js/demo.js"></script>
 
 <?php
-    $message =Session::get('message');
-    if ($message) {
-        echo $message;
-        Session::put('message',null);
-    }
+$message = Session::get('message');
+if ($message) {
+    echo $message;
+    Session::put('message', null);
+}
 ?>
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function() {
 
         demo.initDashboardPageCharts();
         demo.initVectorMap();
@@ -128,7 +132,7 @@
             icon: 'pe-7s-bell',
             message: <?php echo $message; ?>
 
-        },{
+        }, {
             type: 'warning',
             timer: 4000
         });
@@ -137,4 +141,3 @@
 </script>
 
 </html>
-

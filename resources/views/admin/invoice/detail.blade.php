@@ -37,18 +37,20 @@
                         <h4 class="title">Thông tin người nhận</h4>
                     </div>
                     <div class="content">
-                        <div class="form-group">
-                            <label>Tên người nhận</label>
-                            <input type="text" class="form-control" value="Nguyen Minh Hieu" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label>Số điện thoại</label>
-                            <input type="text" class="form-control" value="0987880765" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label>Địa chỉ</label>
-                            <input type="text" class="form-control" value="Ha Noi" disabled>
-                        </div>
+                        @foreach ($list2 as $key => $value)
+                            <div class="form-group">
+                                <label>Tên người nhận</label>
+                                <input type="text" class="form-control" value="{{ $value->shipping_name }}" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label>Số điện thoại</label>
+                                <input type="text" class="form-control" value="{{ $value->shipping_phone }}" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label>Địa chỉ</label>
+                                <input type="text" class="form-control" value="{{ $value->shipping_address }}" disabled>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -137,9 +139,8 @@
                                     </td>
                                     <td>
                                         <strong>
-                                            <span style="font-size:20px"> ${{ number_format($total, 1`) }}</span>
+                                            <span style="font-size:20px"> ${{ number_format($total, 1) }}</span>
                                             <strong>
-
                                     </td>
                                 </tr>
                             </tbody>

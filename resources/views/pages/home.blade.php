@@ -12,7 +12,8 @@
                                 <img src="{{ $item->image }}" alt="" />
                                 <h2>{{ '$' . number_format($item->price) }}</h2>
                                 <p>{{ $item->name }}</p>
-                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
+                                <a href="{{ URL::to('/chi-tiet-san-pham/' . $item->id_product) }}"
+                                    class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to
                                     cart</a>
                             </div>
                             {{-- <div class="product-overlay">

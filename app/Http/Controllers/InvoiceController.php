@@ -14,6 +14,7 @@ class InvoiceController extends Controller
     {
         $list = DB::table("hoa_don")
             ->join("khach_hang", 'hoa_don.customer', '=', 'khach_hang.id_customer')
+            ->orderBy('id_invoice', 'desc')
             ->get();
         return view('admin.invoice.all', [
             "list" => $list
@@ -29,6 +30,8 @@ class InvoiceController extends Controller
 
         $list2 = DB::table("hoa_don")
             ->join("khach_hang", 'hoa_don.customer', '=', 'khach_hang.id_customer')
+            ->join("shipping", 'hoa_don.shipping_id', '=', 'shipping.shipping_id')
+            ->join("payment", 'hoa_don.payment_id', '=', 'payment.payment_id')
             ->Where('id_invoice', $id_invoice)
             ->get();
         return view('admin.invoice.detail', [

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 //frontend
 Route::get('/', 'HomeController@index');
 Route::get('/trang-chu', 'HomeController@index');
+Route::post('/tim-kiem', 'HomeController@search');
 
 //danh muc san pham trang chu
 Route::get('/danh-muc-san-pham/{id_category}', 'CategoryProduct@show_category_home');
@@ -15,6 +16,23 @@ Route::get('/chi-tiet-san-pham/{id_product}', 'ProductController@show_detail_pro
 
 //cart
 Route::post('/save-cart', 'CartController@save_cart');
+Route::get('/show-cart', 'CartController@show_cart');
+Route::get('/delete-to-cart/{rowId}', 'CartController@delete_to_cart');
+Route::post('/update-cart-qty', 'CartController@update_cart_qty');
+
+//checkout cart
+Route::get('/login-checkout', 'CheckoutController@login_checkout');
+Route::get('/logout-checkout', 'CheckoutController@logout_checkout');
+Route::post('/login-customer', 'CheckoutController@login_customer');
+Route::post('/add-customer', 'CheckoutController@add_customer');
+Route::get('/checkout', 'CheckoutController@checkout');
+Route::post('/save-checkout-customer', 'CheckoutController@save_checkout_customer');
+Route::get('/payment', 'CheckoutController@payment');
+Route::post('/order-place', 'CheckoutController@order_place');
+
+//invoice history
+Route::get('/invoice-history', 'InvoiceHistoryController@invoice_history');
+Route::get('/invoice-history-detail/{id_invoice}', 'InvoiceHistoryController@invoice_history_detail');
 
 
 
