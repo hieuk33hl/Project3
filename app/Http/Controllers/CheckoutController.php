@@ -20,7 +20,6 @@ class CheckoutController extends Controller
 
         $id_cus = Session::get('customer_id');
         if ($id_cus) {
-            echo "haha";
             return Redirect::to('/');
         }
         return view('pages.checkout.login_checkout', [

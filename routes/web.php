@@ -33,6 +33,8 @@ Route::post('/order-place', 'CheckoutController@order_place');
 //invoice history
 Route::get('/invoice-history', 'InvoiceHistoryController@invoice_history');
 Route::get('/invoice-history-detail/{id_invoice}', 'InvoiceHistoryController@invoice_history_detail');
+Route::get('/account-info', 'InvoiceHistoryController@account_info');
+Route::post('/save-info-cus', 'InvoiceHistoryController@save_info');
 
 
 
