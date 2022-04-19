@@ -12,6 +12,8 @@ class HomeController extends Controller
         $category = DB::table("danh_muc")->orderBy('id_category', 'ASC')->where("danh_muc.status", 1)->get();
         $supplier = DB::table("nha_cung_cap")->orderBy('id_supplier', 'ASC')->get();
         $product = DB::table("san_pham")->where("san_pham.status", 1)->orderBy('id_product', 'ASC')->limit(9)->get();
+
+        //
         return view('pages.home', [
             'category' => $category,
             'supplier' => $supplier,
