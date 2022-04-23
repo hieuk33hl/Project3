@@ -8,7 +8,6 @@
 
         @foreach ($product as $item)
             <a href="{{ URL::to('/chi-tiet-san-pham/' . $item->id_product) }}">
-
                 <div class="col-sm-4">
                     <div class="product-image-wrapper">
                         <div class="single-products">

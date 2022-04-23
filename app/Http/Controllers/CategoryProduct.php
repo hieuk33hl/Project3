@@ -68,6 +68,7 @@ class CategoryProduct extends Controller
         $category_by_id = DB::table("san_pham")
             ->join("danh_muc", 'san_pham.category', '=', 'danh_muc.id_category')
             ->where('san_pham.category', $id_category)
+            ->where('san_pham.status', 1)
             ->get();
 
         $category_name = DB::table("danh_muc")->where("danh_muc.id_category", $id_category)->limit(1)->get();

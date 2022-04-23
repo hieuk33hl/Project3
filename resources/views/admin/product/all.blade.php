@@ -67,7 +67,7 @@
 
                                         </td>
 
-                                        <td>{{ $value->date }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($value->date)->format('d/m/Y') }}</td>
                                         <td class="td-actions text-right">
                                             <a href="{{ URL::to('/edit-product/' . $value->id_product) }}" rel="tooltip"
                                                 title="Sửa thông tin" class="btn btn-success btn-simple btn-xs">
