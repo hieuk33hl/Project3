@@ -131,10 +131,13 @@ class CheckoutController extends Controller
             $order_detail['quantity'] = $v_content->qty;
 
             DB::table('hoa_don_ct')->insert($order_detail);
+            $stock = DB::table("san_pham")->where('id_product', $v_content->id)->get('stock');
+            foreach ($stock as $item) {
+                $stock = $item->stock;
+                $stock  -=  $v_content->qty;
+            }
+            DB::table("san_pham")->where('id_product', $v_content->id)->update(['stock' => $stock]);
         }
-
-        $category = DB::table("danh_muc")->orderBy('id_category', 'ASC')->where("danh_muc.status", 1)->get();
-        $supplier = DB::table("nha_cung_cap")->orderBy('id_supplier', 'ASC')->get();
 
         if ($data['payment_method'] == 'atm') {
             $cash = 0;
@@ -142,10 +145,23 @@ class CheckoutController extends Controller
             $cash = 1;
         }
         Cart::destroy();
-        return view('pages.checkout.cash', [
-            'category' => $category,
-            'supplier' => $supplier,
-            'cash' => $cash,
-        ]);
+
+        return Redirect::to('/success-order?cash=' . $cash . '&id=' . $order_id);
+    }
+    public function success_order(Request $request)
+    {
+        $category = DB::table("danh_muc")->orderBy('id_category', 'ASC')->where("danh_muc.status", 1)->get();
+        $supplier = DB::table("nha_cung_cap")->orderBy('id_supplier', 'ASC')->get();
+        $cash = $request->cash;
+        $id = $request->id;
+        return view(
+            'pages.checkout.cash',
+            [
+                'category' => $category,
+                'supplier' => $supplier,
+                'cash' => $cash,
+                'id' => $id,
+            ]
+        );
     }
 }

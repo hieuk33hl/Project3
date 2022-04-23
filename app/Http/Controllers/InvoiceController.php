@@ -48,4 +48,36 @@ class InvoiceController extends Controller
 
         return redirect('/detail-invoice/' . $id_invoice);
     }
+
+    public function cancel_order(Request $request, $id_invoice)
+    {
+        $data = array();
+        $data['status_order'] = $request->status;
+        DB::table('hoa_don')->Where('id_invoice', $id_invoice)->update($data);
+
+        return redirect('/invoice-history-detail/' . $id_invoice);
+    }
+    public function processed()
+    {
+        $list = DB::table("hoa_don")
+            ->join("khach_hang", 'hoa_don.customer', '=', 'khach_hang.id_customer')
+            ->where('status_order', '!=', 0)
+            ->orderBy('id_invoice', 'desc')
+            ->get();
+        return view('admin.invoice.processed', [
+            "list" => $list
+        ]);
+    }
+
+    public function notprocessed()
+    {
+        $list = DB::table("hoa_don")
+            ->join("khach_hang", 'hoa_don.customer', '=', 'khach_hang.id_customer')
+            ->where('status_order',  0)
+            ->orderBy('id_invoice', 'desc')
+            ->get();
+        return view('admin.invoice.notprocessed', [
+            "list" => $list
+        ]);
+    }
 }

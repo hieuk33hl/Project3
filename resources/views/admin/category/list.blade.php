@@ -2,18 +2,29 @@
 @section('content')
     <div class="row">
         <div class="col-md-6">
+            <?php
+            $message = Session::get('message');
+            ?>
+            @if ($message)
+                <div class="alert alert-success" id="hideMeAfter5Seconds">
+                    <span>{{ $message }}</span>
+                </div>
+            @endif
+
+            <?php
+            Session::put('message', null);
+            ?>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
             <div class="card">
                 <div class="header">
                     <h4 class="title">Danh sách danh mục sản phẩm</h4>
                 </div>
-                <?php
-                $message = Session::get('message');
-                if ($message) {
-                    echo $message;
-                    Session::put('message', null);
-                }
-                ?>
-                <a href="{{ URL::to('/add-category-product') }}" class="btn btn-success btn-fill btn-wd">Thêm</a>
+
+                <a href="{{ URL::to('/add-category-product') }}" class="btn btn-success btn-fill btn-wd"
+                    style="margin-left: 577px; margin-top: -41px;min-width: 72px;">Thêm</a>
                 <div class="content">
                     <div class="content table-responsive table-full-width">
                         <table class="table">
@@ -38,15 +49,29 @@
                                             @endif
                                         </td>
                                         <td class="td-actions text-right">
-                                            <a href="{{ URL::to('/edit-category-product/' . $value->id_category) }}"
-                                                rel="tooltip" title="Sửa thông tin"
-                                                class="btn btn-success btn-simple btn-xs">
-                                                <i class="fa fa-edit"></i>
-                                            </a>
-                                            <a href="{{ URL::to('/delete-category-product') }}" rel="tooltip" title="Ẩn"
-                                                class="btn btn-danger btn-simple btn-xs">
-                                                <i class="fa fa-times"></i>
-                                            </a>
+                                            <strong>
+                                                <a href="{{ URL::to('/edit-category-product/' . $value->id_category) }}"
+                                                    rel="tooltip" title="Sửa thông tin"
+                                                    class="btn btn-success btn-simple btn-xs">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                @if ($value->status == 0)
+                                                    <a href="{{ URL::to('/active-category-product/' . $value->id_category) }}"
+                                                        rel="tooltip" title="Hiển thị"
+                                                        class="btn btn-info btn-simple btn-xs">
+                                                        <i class="pe-7s-check"></i>
+                                                    </a>
+                                                @else
+                                                    <a href="{{ URL::to('/unactive-category-product/' . $value->id_category) }}"
+                                                        rel="tooltip" title="Ẩn" class="btn btn-danger btn-simple btn-xs"
+                                                        onclick="confirm('Bạn có chắc muốn ẩn ')">
+                                                        <i class="fa fa-times"></i>
+                                                    </a>
+                                                @endif
+
+
+                                            </strong>
+
                                         </td>
                                     </tr>
                                 @endforeach

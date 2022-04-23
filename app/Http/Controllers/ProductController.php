@@ -38,8 +38,6 @@ class ProductController extends Controller
         $data['category'] = $request->product_category;
         $data['supplier'] = $request->product_supplier;
         $data['detail'] = $request->product_detail;
-        $data['status'] = $request->product_status;
-
         $get_image = $request->file('product_image');
 
         if ($get_image) {
@@ -48,14 +46,15 @@ class ProductController extends Controller
             $new_image = $name_image . rand(0, 99) . '.' . $get_image->getClientOriginalExtension();
             $get_image->move('public/upload/product', $new_image);
             $data['image'] = $new_image;
+
             DB::table('san_pham')->insert($data);
+
             return Redirect::to('/all-product');
         }
-        print_r($data);
-        die();
+
         $data['image'] = '';
         DB::table('san_pham')->insert($data);
-        Session::put('message', 'Thêm sản phẩm thành công');
+        Session::put('message', 'Thêm thành công');
         return Redirect::to('/all-product');
     }
 
@@ -104,7 +103,7 @@ class ProductController extends Controller
 
         DB::table('san_pham')->Where('id_product', $id_product)->update($data);
 
-        Session::put('message', 'Cập nhật sản phẩm thành công');
+        Session::put('message', 'Cập nhật thành công');
         return Redirect::to('/all-product');
     }
 
@@ -138,5 +137,15 @@ class ProductController extends Controller
             'detail' => $detail,
             'related_products' => $related_products
         ]);
+    }
+    public function active($id_product)
+    {
+        DB::table("san_pham")->where("id_product", $id_product)->update(['status' => 1]);
+        return Redirect::to('/all-product');
+    }
+    public function unactive($id_product)
+    {
+        DB::table("san_pham")->where("id_product", $id_product)->update(['status' => 0]);
+        return Redirect::to('/all-product');
     }
 }

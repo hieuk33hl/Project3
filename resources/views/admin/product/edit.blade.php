@@ -30,7 +30,13 @@
                                     <div class="form-group">
                                         <label>ảnh sản phẩm</label>
                                         <input type="file" class="form-control" name="product_image">
-                                        <img src="{{ $value->image }}" width="100" height="100 " />
+
+                                        @if (str_contains($value->image, 'https') === true)
+                                            <img src="{{ $value->image }}" width="80px" height="80px">
+                                        @else
+                                            <img src=" {{ URL::to('public/upload/product/' . $value->image) }}"
+                                                width="80px" height="80px">
+                                        @endif
                                     </div>
                                     <div class="form-group">
                                         <label>Danh mục sản phẩm</label>
@@ -70,10 +76,7 @@
                                 </textarea>
                                     </div>
 
-                                    <p class="category">Trạng thái</p>
-                                    <input type="checkbox" data-toggle="switch" checked="" name="product_status" value="1"
-                                        data-off-text="Ẩn" data-on-text="Hiện" />
-                                    </br> </br>
+
                                     <button type="submit" class="btn btn-fill btn-info" name="update">Cập nhật </button>
                         @endforeach
 

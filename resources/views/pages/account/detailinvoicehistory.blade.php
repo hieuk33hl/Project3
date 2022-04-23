@@ -33,6 +33,17 @@
                     </tr>
                 </table>
             </div>
+            @if ($item->status_order == 0)
+                <div class="col-xs-12 col-md-2">
+                    <form method="get" action="{{ URL::to('/cancel-order/' . $item->id_invoice) }}">
+                        <button class="btn btn-danger btn-fill btn-wd" name="status" value="1" type="submit"
+                            onclick="confirm('Bạn có chắc hủy đơn hàng không')">
+                            <h4>Hủy đơn hàng</h4>
+                        </button>
+                    </form>
+                </div>
+            @endif
+
         </div>
 
         <div class="row">

@@ -41,7 +41,7 @@
                             </td>
                             <td class="cart_description">
                                 <h4><a href="">{{ $v_content->name }} </a></h4>
-                                <p>Web ID: {{ $v_content->id }}</p>
+                                <p>ID: {{ $v_content->id }}</p>
                             </td>
                             <td class="cart_price">
                                 <p>${{ $v_content->price }}</p>
@@ -107,7 +107,7 @@
                     <label><input type="radio" name="payment" value="atm"> Thanh toán qua chuyển khoản</label>
                 </span>
                 <span>
-                    <label><input type="radio" name="payment" value="cash"> Nhận tiền mặt</label>
+                    <label><input type="radio" name="payment" value="cash"> Tiền mặt(Ship COD)</label>
                 </span>
                 <span>
                     <input type="hidden" name="total" value="{{ $total }}">

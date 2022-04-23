@@ -45,10 +45,23 @@
                                             @endif
                                         </td>
                                         <td class="td-actions text-right">
-                                            <a href="{{ URL::to('/edit-employee/' . $value->id_customer) }}" rel="tooltip"
-                                                title="Thông tin chi tiết" class="btn btn-success btn-simple btn-xs">
+                                            <a href="{{ URL::to('/detail-customer/' . $value->id_customer) }}"
+                                                rel="tooltip" title="Thông tin chi tiết"
+                                                class="btn btn-success btn-simple btn-xs">
                                                 <i class="fa fa-edit"></i>
                                             </a>
+                                            @if ($value->status == 0)
+                                                <a href="{{ URL::to('/active-customer/' . $value->id_customer) }}"
+                                                    rel="tooltip" title="Hiển thị" class="btn btn-info btn-simple btn-xs">
+                                                    <i class="pe-7s-check"></i>
+                                                </a>
+                                            @else
+                                                <a href="{{ URL::to('/unactive-customer/' . $value->id_customer) }}"
+                                                    rel="tooltip" title="Ẩn" class="btn btn-danger btn-simple btn-xs"
+                                                    onclick="confirm('Bạn có chắc muốn ẩn ')">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

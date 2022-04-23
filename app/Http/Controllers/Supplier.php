@@ -31,7 +31,7 @@ class Supplier extends Controller
         $data['phone'] = $request->supplier_phone;
 
         DB::table('nha_cung_cap')->insert($data);
-        Session::put('message', 'Thêm danh mục sản phẩm thành công');
+        Session::put('message', 'Thêm thành công');
         return Redirect::to('/all-supplier');
     }
 
@@ -52,7 +52,7 @@ class Supplier extends Controller
         $data['address'] = $request->supplier_address;
         $data['phone'] = $request->supplier_phone;
         DB::table('nha_cung_cap')->Where('id_supplier', $id_supplier)->update($data);
-        Session::put('message', 'Cập nhật nhà cung cấp thành công');
+        Session::put('message', 'Cập nhật thành công');
         return Redirect::to('/all-supplier');
     }
 
@@ -75,5 +75,16 @@ class Supplier extends Controller
             'product' => $brand_by_id,
             'brand_name' => $brand_name
         ]);
+    }
+
+    public function unactive($id_sup)
+    {
+        DB::table("nha_cung_cap")->where("id_supplier", $id_sup)->update(['sup_status' => 0]);
+        return Redirect::to('/all-supplier');
+    }
+    public function active($id_sup)
+    {
+        DB::table("nha_cung_cap")->where("id_supplier", $id_sup)->update(['sup_status' => 1]);
+        return Redirect::to('/all-supplier');
     }
 }

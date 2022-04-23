@@ -1,21 +1,34 @@
 @extends('layout.app')
 @section('content')
     <div class="row">
+        <div class="col-md-6">
+            <?php
+            $message = Session::get('message');
+            ?>
+            @if ($message)
+                <div class="alert alert-success" id="hideMeAfter5Seconds">
+                    <span>{{ $message }}</span>
+                </div>
+            @endif
+
+            <?php
+            Session::put('message', null);
+            ?>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-10">
             <div class="card">
                 <div class="header">
-                    <h4 class="title">Danh sách sản phẩm </h4>
+                    <h4 class="title" align="center">Danh sách sản phẩm </h4>
                 </div>
                 <?php
-                $message = Session::get('message');
-                if ($message) {
-                    echo $message;
-                    Session::put('message', null);
-                }
                 setlocale(LC_MONETARY, 'en_US');
-                // echo money_format($number);
                 ?>
-                <a href="{{ URL::to('/add-product') }}" class="btn btn-success btn-fill btn-wd">Thêm</a>
+                <a href="{{ URL::to('/add-product') }}" class="btn btn-success btn-fill"
+                    style="margin-left: 1029px; margin-top: -41px;min-width: 72px;">
+                    Thêm
+                </a>
                 <div class="content">
                     <div class="content table-responsive table-full-width">
                         <table class="table">
@@ -38,16 +51,20 @@
                                         <td>${{ number_format($value->price, 1) }}$ </td>
                                         {{-- <td>{{ $value->image}}</td> --}}
                                         <td>
-                                            <img src="{{ $value->image }}" width="80px" height="80px">
+                                            @if (str_contains($value->image, 'https') === true)
+                                                <img src="{{ $value->image }}" width="80px" height="80px">
+                                            @else
+                                                <img src="public/upload/product/{{ $value->image }}" width="80px"
+                                                    height="80px">
+                                            @endif
                                         </td>
                                         <td>
-                                            @if ($value->status === 1)
-                                                <input type="checkbox" data-toggle="switch" checked="" name="product_status"
-                                                    value="{{ $value->status }}" data-off-text="Ẩn" data-on-text="Hiện" />
+                                            @if ($value->status == 0)
+                                                <strong class="text-danger"> Ẩn</strong>
                                             @else
-                                                <input type="checkbox" data-toggle="switch" checked="" name="product_status"
-                                                    value="{{ $value->status }}" data-off-text="Ẩn" data-on-text="Hiện" />
+                                                <strong class="text-info"> Hiển thị</strong>
                                             @endif
+
                                         </td>
 
                                         <td>{{ $value->date }}</td>
@@ -56,10 +73,18 @@
                                                 title="Sửa thông tin" class="btn btn-success btn-simple btn-xs">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <a href="{{ URL::to('/detail-product/' . $value->id_product) }}" rel="tooltip"
-                                                title="Chi tiet" class="btn btn-info btn-simple btn-xs">
-                                                <i class="pe-7s-info"></i>
-                                            </a>
+                                            @if ($value->status == 0)
+                                                <a href="{{ URL::to('/active-product/' . $value->id_product) }}"
+                                                    rel="tooltip" title="Hiển thị" class="btn btn-info btn-simple btn-xs">
+                                                    <i class="pe-7s-check"></i>
+                                                </a>
+                                            @else
+                                                <a href="{{ URL::to('/unactive-product/' . $value->id_product) }}"
+                                                    rel="tooltip" title="Ẩn" class="btn btn-danger btn-simple btn-xs"
+                                                    onclick="confirm('Bạn có chắc muốn ẩn ')">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

@@ -19,8 +19,7 @@
                         <form method="POST" action="{{ URL::to('/update-supplier/' . $value->id_supplier) }}">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label>ID</label>
-                                <input type="number" placeholder="ID danh mục" class="form-control" readonly="readonly"
+                                <input type="hidden" placeholder="ID danh mục" class="form-control"
                                     value="{{ $value->id_supplier }}">
                             </div>
                             <div class="form-group">
@@ -38,10 +37,6 @@
                                 <input type="text" placeholder="Tên danh mục" class="form-control" name="supplier_phone"
                                     value="{{ $value->phone }}">
                             </div>
-                            <p class="category">Trạng thái</p>
-                            <input type="checkbox" data-toggle="switch" checked="" name="category_product_status" value="1"
-                                data-off-text="Ẩn" data-on-text="Hiện" />
-                            </br> </br>
 
                             <button type="submit" class="btn btn-fill btn-info">Update</button>
                         </form>

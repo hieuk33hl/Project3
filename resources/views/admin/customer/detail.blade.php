@@ -2,25 +2,9 @@
 @section('content')
     <div class="row">
         <div class="col-md-6">
-            <?php
-            $message = Session::get('message');
-            ?>
-            @if ($message)
-                <div class="alert alert-success" id="hideMeAfter5Seconds">
-                    <span>{{ $message }}</span>
-                </div>
-            @endif
-
-            <?php
-            Session::put('message', null);
-            ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
             <div class="card">
                 <div class="header">
-                    <h4 class="title">Danh sách hóa đơn</h4>
+                    <h4 class="title" align="center">Danh sách hóa đơn của khách hàng </h4>
                 </div>
 
                 <div class="content">
@@ -28,6 +12,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th class="text-center"></th>
                                     <th class="text-center">ID</th>
                                     <th>Ngày đặt hàng</th>
                                     <th>Số điện thoại đặt hàng</th>
@@ -36,8 +21,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php $i = 0; ?>
                                 @foreach ($list as $key => $value)
                                     <tr>
+                                        <td class="text-center">
+                                            <b>#{{ ++$i }}</b>
+
+                                        </td>
+
                                         <td class="text-center">{{ $value->id_invoice }}</td>
                                         <td> {{ \Carbon\Carbon::parse($value->Date)->format('d/m/Y') }}</td>
                                         <td>{{ $value->phone }}</td>

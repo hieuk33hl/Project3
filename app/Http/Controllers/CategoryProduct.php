@@ -36,7 +36,7 @@ class CategoryProduct extends Controller
         $data['status'] = $request->category_product_status;
 
         DB::table('danh_muc')->insert($data);
-        Session::put('message', 'Thêm danh mục sản phẩm thành công');
+        Session::put('message', 'Thêm thành công');
         return Redirect::to('/all-category-product');
     }
 
@@ -56,7 +56,7 @@ class CategoryProduct extends Controller
         $data['name_cat'] = $request->category_product_name;
         $data['status'] = $request->category_product_status;
         DB::table('danh_muc')->Where('id_category', $id_category)->update($data);
-        Session::put('message', 'Cập nhật danh mục thành công');
+        Session::put('message', 'Cập nhật thành công');
         return Redirect::to('/all-category-product');
     }
 
@@ -77,5 +77,16 @@ class CategoryProduct extends Controller
             'product' => $category_by_id,
             'category_name' => $category_name
         ]);
+    }
+
+    public function unactive($id_category)
+    {
+        DB::table("danh_muc")->where("id_category", $id_category)->update(['status' => 0]);
+        return Redirect::to('/all-category-product');
+    }
+    public function active($id_category)
+    {
+        DB::table("danh_muc")->where("id_category", $id_category)->update(['status' => 1]);
+        return Redirect::to('/all-category-product');
     }
 }

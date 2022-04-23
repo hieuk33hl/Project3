@@ -28,7 +28,21 @@
     <link href="{{ asset('assets') }}/css/pe-icon-7-stroke.css" rel="stylesheet" />
     <script src="https://unpkg.com/sweetalert2@7.18.0/dist/sweetalert2.all.js"></script>
     @include('sweetalert::alert')
+    <style>
+        #hideMeAfter5Seconds {
+            animation: hideAnimation 0s ease-in 5s;
+            animation-fill-mode: forwards;
+        }
 
+        @keyframes hideAnimation {
+            to {
+                visibility: hidden;
+                width: 0;
+                height: 0;
+            }
+        }
+
+    </style>
 </head>
 
 <body>

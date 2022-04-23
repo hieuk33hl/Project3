@@ -2,27 +2,10 @@
 @section('content')
     <div class="row">
         <div class="col-md-6">
-            <?php
-            $message = Session::get('message');
-            ?>
-            @if ($message)
-                <div class="alert alert-success" id="hideMeAfter5Seconds">
-                    <span>{{ $message }}</span>
-                </div>
-            @endif
-
-            <?php
-            Session::put('message', null);
-            ?>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
             <div class="card">
                 <div class="header">
-                    <h4 class="title">Danh sách hóa đơn</h4>
+                    <h4 class="title" align="center">Danh sách hóa đơn đã xử lý</h4>
                 </div>
-
                 <div class="content">
                     <div class="content table-responsive table-full-width">
                         <table class="table">
@@ -39,7 +22,9 @@
                                 @foreach ($list as $key => $value)
                                     <tr>
                                         <td class="text-center">{{ $value->id_invoice }}</td>
-                                        <td> {{ \Carbon\Carbon::parse($value->Date)->format('d/m/Y') }}</td>
+                                        <td>
+                                            {{ \Carbon\Carbon::parse($value->Date)->format('d/m/Y') }}
+                                        </td>
                                         <td>{{ $value->phone }}</td>
                                         <td>
                                             @if ($value->status_order == 0)

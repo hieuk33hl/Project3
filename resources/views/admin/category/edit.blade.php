@@ -19,19 +19,28 @@
                         <form method="POST" action="{{ URL::to('/update-category-product/' . $value->id_category) }}">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label>ID danh mục</label>
-                                <input type="number" placeholder="ID danh mục" class="form-control" readonly="readonly"
+
+                                <input type="hidden" placeholder="ID danh mục" class="form-control"
                                     value="{{ $value->id_category }}" </div>
                                 <div class="form-group">
                                     <label>Tên danh mục</label>
                                     <input type="text" placeholder="Tên danh mục" class="form-control"
-                                        name="category_product_name" value="{{ $value->name_cat }}" </div>
-                                    <p class="category">Trạng thái</p>
-                                    <input type="checkbox" data-toggle="switch" checked="" name="category_product_status"
-                                        value="1" data-off-text="Ẩn" data-on-text="Hiện" />
-                                    </br> </br>
+                                        name="category_product_name" value="{{ $value->name_cat }}">
+                                </div>
 
-                                    <button type="submit" class="btn btn-fill btn-info">Update</button>
+                                {{-- <div class="row">
+                                    <div class="col-md-6">
+                                        <select name="cities" class="selectpicker" data-title="Danh mục sản phẩm"
+                                            data-style="btn-default btn-block" data-menu-style="dropdown-blue">
+                                            <option value="id">Bahasa Indonesia</option>
+                                            <option value="ms">Bahasa Melayu</option>
+                                            <option value="ca">Català</option>
+                                            <option value="da">Dansk</option>
+                                        </select>
+                                    </div>
+                                </div> --}}
+                                <br />
+                                <button type="submit" class="btn btn-fill btn-info">Update</button>
                         </form>
                         @endforeach
                     </div>

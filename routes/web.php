@@ -29,12 +29,16 @@ Route::get('/checkout', 'CheckoutController@checkout');
 Route::post('/save-checkout-customer', 'CheckoutController@save_checkout_customer');
 Route::get('/payment', 'CheckoutController@payment');
 Route::post('/order-place', 'CheckoutController@order_place');
+Route::get('/success-order', 'CheckoutController@success_order');
 
 //invoice history
 Route::get('/invoice-history', 'InvoiceHistoryController@invoice_history');
 Route::get('/invoice-history-detail/{id_invoice}', 'InvoiceHistoryController@invoice_history_detail');
 Route::get('/account-info', 'InvoiceHistoryController@account_info');
 Route::post('/save-info-cus', 'InvoiceHistoryController@save_info');
+
+Route::get('/cancel-order/{id_invoice}', 'InvoiceController@cancel_order');
+
 
 
 
@@ -51,6 +55,9 @@ Route::get('/all-category-product', 'CategoryProduct@all_category_product');
 Route::post('/save-category-product', 'CategoryProduct@save_category_product');
 Route::get('/edit-category-product/{id_category}', 'CategoryProduct@edit_category_product');
 Route::post('/update-category-product/{id_category}', 'CategoryProduct@update_category_product');
+Route::get('/unactive-category-product/{id_category}', 'CategoryProduct@unactive');
+Route::get('/active-category-product/{id_category}', 'CategoryProduct@active');
+
 
 //Supplier
 
@@ -59,6 +66,8 @@ Route::get('/add-supplier', 'Supplier@add_supplier');
 Route::post('/save-supplier', 'Supplier@save_supplier');
 Route::get('/edit-supplier/{id_supplier}', 'Supplier@edit_supplier');
 Route::post('/update-supplier/{id_supplier}', 'Supplier@update_supplier');
+Route::get('/unactive-supplier-product/{id_supplier}', 'Supplier@unactive');
+Route::get('/active-supplier-product/{id_supplier}', 'Supplier@active');
 
 
 //products
@@ -68,6 +77,8 @@ Route::get('/edit-product/{id_product}', 'ProductController@edit_product');
 Route::post('/save-product', 'ProductController@save_product');
 Route::get('/detail-product/{id_product}', 'ProductController@detail_product');
 Route::post('/update-product/{id_product}', 'ProductController@update_product');
+Route::get('/active-product/{id_product}', 'ProductController@active');
+Route::get('/unactive-product/{id_product}', 'ProductController@unactive');
 
 
 //employee
@@ -76,12 +87,20 @@ Route::get('/add-employee', 'EmployeeController@add_employee');
 Route::post('/save-employee', 'EmployeeController@save_employee');
 Route::get('/edit-employee/{id_employee}', 'EmployeeController@edit_employee');
 Route::post('/update-employee/{id_employee}', 'EmployeeController@update_employee');
+Route::get('/active-employee/{id_em}', 'EmployeeController@active');
+Route::get('/unactive-employee/{id_em}', 'EmployeeController@unactive');
+
 
 //Customer
 Route::get('/all-customer', 'CustomerController@all_customer');
+Route::get('/detail-customer/{id_cus}', 'CustomerController@detail');
+Route::get('/active-customer/{id_cus}', 'CustomerController@active');
+Route::get('/unactive-customer/{id_cus}', 'CustomerController@unactive');
 
 
 //Invoice
 Route::get('/all-invoice', 'InvoiceController@all_invoice');
 Route::get('/detail-invoice/{id_invoice}', 'InvoiceController@detail_invoice');
 Route::get('/update-status-order/{id_invoice}', 'InvoiceController@update_invoice');
+Route::get('/invoice-processed', 'InvoiceController@processed');
+Route::get('/invoice-notprocessed', 'InvoiceController@notprocessed');
